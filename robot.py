@@ -17,14 +17,22 @@ def receive_message(msg):
     print this_time
     time.sleep(this_time)
     swicher.receive_message(msg)
-    # 根据用户名或者备注名搜索到这个好友。
-    # 这个name为 nickname || remarkname， 结果为数组
-    users = itchat.search_friends(name=u'测试')
-    # 根据备注名搜索用户
-    # testUsers1 = itchat.search_friends(remarkName=u'熊彬')
+    # 找到指定用户并发消息
+    send_message_to_specific_user()
     # 为了保证在图灵Key出现问题的时候仍旧可以回复，这里设置一个默认回复
     default_reply = 'I received: ' + msg['Text']
     return default_reply
+
+
+def send_message_to_specific_user():
+    # 根据用户名或者备注名搜索到这个好友。这个name为 nickname || remarkname， 结果为数组
+    users = itchat.search_friends(name=u'测试')
+    # 找到UserName
+    userName = users[0]['UserName']
+    # 然后给他发消息
+    itchat.send('hello', toUserName=userName)
+    # 根据备注名搜索用户
+    # testUsers1 = itchat.search_friends(remarkName=u'张三')
 
 
 itchat.login(loginCallback=utils.login_callback)
