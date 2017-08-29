@@ -1,15 +1,5 @@
 # coding=utf8
-import time, random
-import itchat
-import utils
-
-
-def buy_flowers():
-    return 'buy flowers'
-
-
-def about_us():
-    return 'about us'
+import time, random, itchat, utils, swicher
 
 
 # 这里是我们在“1. 实现微信消息的获取”中已经用到过的同样的注册方法
@@ -26,11 +16,7 @@ def receive_message(msg):
     this_time = random.randint(2, 6)
     print this_time
     time.sleep(this_time)
-    switcher = {
-        1: buy_flowers,
-        2: about_us()
-    }
-    switcher.get(msg['Text'])
+    swicher.receive_message(msg)
     # 根据用户名或者备注名搜索到这个好友。
     # 这个name为 nickname || remarkname， 结果为数组
     users = itchat.search_friends(name=u'测试')
